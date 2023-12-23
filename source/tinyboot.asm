@@ -5,7 +5,7 @@
 ;;                                                        ;;
 ;;                    How to compile:                     ;;
 ;;                    ~~~~~~~~~~~~~~~                     ;;
-;;   nasm 8086/tinyboot.asm -f bin -o 8086/tinyboot.bin   ;;
+;; nasm source/tinyboot.asm -f bin -o source/tinyboot.bin ;;
 ;;                                                        ;;
 ;;                       Features:                        ;;
 ;;                       ~~~~~~~~~                        ;;
@@ -15,7 +15,7 @@
 ;;                                                        ;;
 ;; - Supports i8086/i8088 CPUs.                           ;;
 ;;                                                        ;;
-;; - Is indeed very tiny indeed.                          ;;
+;; - It is very tiny indeed.                              ;;
 ;;                                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -50,29 +50,26 @@ KernelAddr              equ     KERNELADDR
 %endif
 KernelOffset            equ     KERNELOFFSET
 
+%macro PRINT 1
+  mov al, %1
+  mov ah, 0xE
+  int 10H
+%endmacro
+
 ORG 7C00H
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Boot sector starts here ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Start of bootsector ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
 
-mov ah, 0xE
-mov al, 'T'
-int 10H
-
+PRINT 'T'
 int 12H
 
-mov ah, 0xE
-mov al, 'I'
-int 10H
-
+PRINT 'I'
 cmp ax, 7600H
-ja error
+ja $
 
-mov ah, 0xE
-mov al, 'N'
-int 10H
-
+PRINT 'N'
 mov al, SectorNum
 mov ah, 2H
 mov ch, 0
@@ -83,20 +80,10 @@ mov bx, KernelAddr
 mov es, bx
 mov bx, KernelOffset
 int 13H
-jnc error
+jnc $
 
-mov ah, 0xE
-mov al, 'Y'
-int 10H
-
+PRINT 'Y'
 jmp KernelAddr:KernelOffset
-
-;;;;;;;;;;;;;;;;;;;;;;
-;; Hang the machine ;;
-;;;;;;;;;;;;;;;;;;;;;;
-
-error:
-  jmp $
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fill free space with zeroes ;;
@@ -108,8 +95,8 @@ times 510 - ($ - $$) db 0
 ;; Make disk bootable ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-dw 0xaa55
+dw 0xAA55
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Boot sector ends here ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+;; End of bootsector ;;
+;;;;;;;;;;;;;;;;;;;;;;;
