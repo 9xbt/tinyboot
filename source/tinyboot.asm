@@ -15,14 +15,7 @@
 ;;                                                        ;;
 ;; - Supports i8086/i8088 CPUs.                           ;;
 ;;                                                        ;;
-;; - Is indeed very tiny.                                 ;;
-;;                                                        ;;
-;;                      How to use:                       ;;
-;;                      ~~~~~~~~~~~                       ;;
-;;                                                        ;;
-;;   Implementing tinyboot into your own kernel is very   ;;
-;;      easy, just define SECTORNUM, KERNELADDR and       ;;
-;;        KERNELOFFSET to their respective values.        ;;
+;; - Is indeed very tiny indeed.                          ;;
 ;;                                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -85,11 +78,12 @@ mov ah, 2H
 mov ch, 0
 mov cl, 2
 mov dh, 0
+mov dl, 80h
 mov bx, KernelAddr
 mov es, bx
 mov bx, KernelOffset
 int 13H
-jc error
+jnc error
 
 mov ah, 0xE
 mov al, 'Y'
