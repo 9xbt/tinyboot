@@ -1,5 +1,5 @@
 # tinyboot
-A very tiny bootloader
+A very small bootloader
 
 ## Prerequesites
 - i8086/i8088 or better CPU
