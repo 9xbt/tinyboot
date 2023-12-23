@@ -1,5 +1,5 @@
 # tinyboot
 A tiny bootloader
 
-> **Note**
+> [!NOTE]
 > This project is still WIP and may not work properly
