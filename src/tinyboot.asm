@@ -5,7 +5,7 @@
 ;;                                                        ;;
 ;;                    How to compile:                     ;;
 ;;                    ~~~~~~~~~~~~~~~                     ;;
-;; nasm source/tinyboot.asm -f bin -o source/tinyboot.bin ;;
+;;    nasm src/tinyboot.asm -f bin -o src/tinyboot.bin    ;;
 ;;                                                        ;;
 ;;                       Features:                        ;;
 ;;                       ~~~~~~~~~                        ;;
