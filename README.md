@@ -1,4 +1,4 @@
-![tinyboot](https://github.com/9xbt/tinyboot/assets/109512837/75ef92e5-04da-4b12-a5df-ea1217568397)<br>
+# tinyboot
 A very small bootloader
 
 ## Prerequesites
