@@ -14,7 +14,7 @@ A very small bootloader
 $ sudo apt-get install nasm
 ```
 
-### Installing prerequisites (Arch)
+### Installing prerequisites (Arch Linux)
 ```sh
 $ sudo pacman -S nasm
 ```
