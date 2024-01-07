@@ -33,7 +33,7 @@ CPU 8086
 SectorNum               equ     SECTORNUM
 
 %ifndef KERNELADDR
-  %define KERNELADDR 800H
+  %define KERNELADDR 500H
 %endif
 %ifnum KERNELADDR
 %else
@@ -71,7 +71,7 @@ ja $
 
 PRINT 'N'
 mov al, SectorNum
-mov ah, 2H
+mov ah, 2
 mov ch, 0
 mov cl, 2
 mov dh, 0
